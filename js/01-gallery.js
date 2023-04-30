@@ -44,3 +44,5 @@ function onGalleryClick(event) {
     }
   }
 }
+
+console.log(galleryItems);
