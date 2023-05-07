@@ -31,18 +31,28 @@ function onGalleryClick(event) {
   const largeImageURL = target.dataset.source;
   const instance = basicLightbox.create(`
     <img src="${largeImageURL}" width="800" height="600">
-`);
+`, {
+    onShow: (instance) => {
+        document.addEventListener("keydown", onEscapePress);
+        console.log("Listener-added");
+    },
+    onClose: (instance) => {
+        document.removeEventListener("keydown", onEscapePress);
+      console.log("Listener-removed");
+       
+    }
+  });
 
   instance.show();
-
-  document.addEventListener("keydown", onEscapePress);
 
   function onEscapePress(event) {
     if (event.code === "Escape") {
       instance.close();
-      document.removeEventListener("keydown", onEscapePress);
     }
   }
 }
 
 console.log(galleryItems);
+
+
+
